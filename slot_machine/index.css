@@ -13,7 +13,7 @@ button {
     border-radius: 4px;
     border: 2px solid black;
     height: 50px;
-    width: 100px;
+    width: auto;
 }
 
 button:hover {
@@ -21,11 +21,26 @@ button:hover {
     color: whitesmoke;
 }
 
-.btnDiv{
+#playerName{
+    text-align: center;
+    width: 180px;
+    height: 30px;
+    font-size: 30px;
+}
+
+.textDiv{
+    margin-top: 30vh;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 30vh;
-    width: 100px;
+    margin-bottom: 8px;
+    width: 180px;
+}
+
+.btnDiv{
+    display: flex;
+    margin-top: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 .txtSection{

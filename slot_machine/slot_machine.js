@@ -5,16 +5,16 @@ export class Slot_machine {
     #img_list = this.#make_img_list();
     //Dictionary for the different Icons
     #slot_machine_icons = [
-        {0 : "https://img.icons8.com/external-those-icons-fill-those-icons/96/external-Seven-casino-and-leisure-those-icons-fill-those-icons.png"},
-        {1 : "https://img.icons8.com/cotton/64/banana.png"},
-        {2 : "https://img.icons8.com/cotton/64/watermelon-2.png"},
-        {3 : "https://img.icons8.com/cotton/64/sour-lemon-.png"},
-        {4 : "https://img.icons8.com/cotton/64/cherry--v1.png"},
-        {5 : "https://img.icons8.com/cotton/64/grape.png"},
-        {6 : "https://img.icons8.com/cotton/64/orange--v1.png"}
+        {0: "https://img.icons8.com/external-those-icons-fill-those-icons/96/external-Seven-casino-and-leisure-those-icons-fill-those-icons.png"},
+        {1: "https://img.icons8.com/cotton/64/banana.png"},
+        {2: "https://img.icons8.com/cotton/64/watermelon-2.png"},
+        {3: "https://img.icons8.com/cotton/64/sour-lemon-.png"},
+        {4: "https://img.icons8.com/cotton/64/cherry--v1.png"},
+        {5: "https://img.icons8.com/cotton/64/grape.png"},
+        {6: "https://img.icons8.com/cotton/64/orange--v1.png"}
     ]
 
-    get last_amount_won(){
+    get last_amount_won() {
         return this.#last_amount_won
     }
 
@@ -24,10 +24,10 @@ export class Slot_machine {
         //Loading In the image list
         document.addEventListener("DOMContentLoaded", () => {
             let slot_section = document.createElement("section");
-            slot_section.className= "slotSection";
+            slot_section.className = "slotSection";
             let outerDiv = document.createElement("div");
             outerDiv.className = "outerDiv"
-            for (let img of this.#img_list){
+            for (let img of this.#img_list) {
                 img.src = this.#getIconUrl(this.#randomNumbers()[0])
                 let inner_div = document.createElement("div");
                 inner_div.className = "innerDiv"
@@ -44,11 +44,11 @@ export class Slot_machine {
     //Playing the Slot machines
     play() {
         this.#nums = this.#randomNumbers();
-        for (let i = 0; i < this.#img_list.length; i++){
+        for (let i = 0; i < this.#img_list.length; i++) {
             this.#img_list[i].src = this.#getIconUrl(this.#nums[i]);
             this.#img_list[i].alt = this.#nums[i];
         }
-        this.#last_amount_won =  this.#calc_winnings(this.#nums)
+        this.#last_amount_won = this.#calc_winnings(this.#nums)
     }
 
     //Function to make the list with the right formatting
@@ -57,7 +57,7 @@ export class Slot_machine {
         let img2 = document.createElement("img");
         let img3 = document.createElement("img");
         let img_list = [img1, img2, img3];
-        for (let img of img_list){
+        for (let img of img_list) {
             img.height = 64;
             img.width = 64;
         }
@@ -65,9 +65,11 @@ export class Slot_machine {
     }
 
     //Picking 3 random numbers from [0-6]
-    #randomNumbers(){
-        let numberList = [0,0,0];
-        for (let i= 0; i<3; i++){numberList[i] = Math.floor(Math.random()*7)}
+    #randomNumbers() {
+        let numberList = [0, 0, 0];
+        for (let i = 0; i < 3; i++) {
+            numberList[i] = Math.floor(Math.random() * 7)
+        }
         return numberList;
     }
 
@@ -78,7 +80,7 @@ export class Slot_machine {
     }
 
     //Calculate the total winnings of the slot machine
-    #calc_winnings(num_list){
+    #calc_winnings(num_list) {
         let first = num_list[0];
         let second = num_list[1];
         let third = num_list[2];
@@ -86,8 +88,11 @@ export class Slot_machine {
         if (first === second && second === third) {
             if (first === 0) return 14;
             else return 7;
-        } else if (first === second){
-            if (first === 0) return 3;
+        } else if (first === second) {
+            if (first === 0) return 4;
+            else return 3;
+        } else if (second === third) {
+            if (second === 0) return 3;
             else return 2;
         } else if (first === 0) return 1;
         else return 0;
