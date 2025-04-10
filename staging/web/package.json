@@ -1,0 +1,14 @@
+{
+  "name": "hacad-slotmachine",
+  "version": "2.0.0",
+  "description": "HACAD Slot Machine Project Group 4",
+  "main": "src/main.js",
+  "scripts": {
+      "start": "node src/main.js"
+  },
+  "dependencies": {
+      "express": "^4.18.2",
+      "mustache-express": "^1.3.2",
+      "pg": "^8.10.0"
+  }
+}
