@@ -2,9 +2,10 @@
   "name": "hacad-slotmachine",
   "version": "2.0.0",
   "description": "HACAD Slot Machine Project Group 4",
-  "main": "src/main.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
