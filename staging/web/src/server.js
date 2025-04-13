@@ -24,11 +24,12 @@ app.set('views', __dirname);
 
 const port = 3000;
 const dbhost = process.env.DB_HOST || 'localhost';
+
 console.log(`DB_HOST: ${dbhost}`);
 const pool = new Pool({
     host: dbhost,
     user: 'dockeruser',
-    password: '$PG_PASSWORD',
+    password: process.env.PG_PASSWORD,
     database: 'leaderboard',
     port: 5432,
 });
@@ -48,6 +49,20 @@ app.post('/api/save-score', async (req, res) => {
         const result = await client.query(query, values);
         client.release();
         res.json({ success: true, data: result.rows[0] });
+    } catch (err) {
+        console.error("Database error:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+//API endpoint to load high scores
+app.get('/api/load-highscores', async (req, res) => {
+    try {
+        const client = await pool.connect();
+        const query = `SELECT playername, score FROM leaderboard ORDER BY score DESC LIMIT 5`;
+        const result = await client.query(query);
+        client.release();
+        res.json({ success: true, data: result.rows });
     } catch (err) {
         console.error("Database error:", err);
         res.status(500).json({ success: false, error: err.message });

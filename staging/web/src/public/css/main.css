@@ -85,4 +85,20 @@ button:hover {
     border-width: 8px;
 }
 
+#leaderboardTitle {
+    text-align: center;
+    font-size: 32px;
+    color: #333;
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
 
+#highScoresList {
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+    border-collapse: collapse;
+    background: #9BD1E5;
+    border: 4px solid #6A8EAE;
+    font-size: 24px;
+}

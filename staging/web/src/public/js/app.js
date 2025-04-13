@@ -179,7 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({ playerName, score: money })
             });
-            
+
+            await getHighScores();
+
             const result = await response.json();
             if (result.success) {
                 alert(`Score saved! ${playerName}: ${money}`);
@@ -195,7 +197,40 @@ document.addEventListener("DOMContentLoaded", () => {
         return [money, playerName];
     }
 
+    async function getHighScores() {
+        try {
+            const response = await fetch('/api/load-highscores', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                let highScoresList = document.getElementById('highScoresList');
+
+                console.log(result)
+
+                document.getElementById('leaderboardTitle').textContent = "🏆 High Scores 🏆";
+
+                highScoresList.innerHTML =  '<tr><th>User</th><th>Score</th></tr>' +  result.data.map(i => `<tr><th>${i.playername}</th><th>${i.score}</th></tr>`).join('');
+
+                if (result.data.length === 0) {
+                    highScoresList.innerHTML = '<tr><th>No high scores ... yet</th></tr>';
+                }
+
+            } else {
+                alert('Failed to get high scores: ' + result.error);
+            }
+        } catch (err) {
+            console.error("Error getting scores:", err);
+            alert('Failed to get high scores. Check console for details.');
+        }
+    }
+
     // Set up event listeners
     document.getElementById("play").addEventListener("click", playGame);
     document.getElementById("cashOut").addEventListener("click", cashOut);
+    getHighScores();
 });
