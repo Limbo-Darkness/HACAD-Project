@@ -27,6 +27,7 @@ services:
     - 3000:3000
     environment:
     - DB_HOST=db
+    - POSTGRES_USER=dockeruser
     - POSTGRES_PASSWORD=$PG_PASSWORD
     depends_on:
     - db

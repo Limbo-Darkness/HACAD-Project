@@ -28,7 +28,7 @@ const dbhost = process.env.DB_HOST || 'localhost';
 console.log(`DB_HOST: ${dbhost}`);
 const pool = new Pool({
     host: dbhost,
-    user: 'dockeruser',
+    user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: 'leaderboard',
     port: 5432,
