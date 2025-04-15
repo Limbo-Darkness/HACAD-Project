@@ -1,9 +1,9 @@
-#need this to install and run npm
 FROM node:18
 
-WORKDIR /
-COPY package.json ./
-COPY ./src ./src
-
+RUN mkdir /app
+WORKDIR /app
+COPY package.json /app/
 RUN npm install
-CMD ["node", "src/server.js"]
+COPY ./src /app/src
+EXPOSE 3000
+CMD ["node","src/server.js"]

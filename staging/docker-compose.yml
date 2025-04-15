@@ -21,6 +21,16 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 
+  web:
+    build: web
+    ports:
+    - 3000:3000
+    environment:
+    - DB_HOST=db
+    - POSTGRES_PASSWORD=$PG_PASSWORD
+    depends_on:
+    - db
+
 volumes: 
   pg-data:
   pgadmin-data:
