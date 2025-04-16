@@ -24,13 +24,23 @@ services:
   web:
     build: web
     ports:
-    - 3000-3003:3000
+      - 3000:3000
+      #- 3000-3003:3000 this gave me a too long to respond error on the site 
     environment:
     - DB_HOST=db
     - POSTGRES_USER=dockeruser
     - POSTGRES_PASSWORD=$PG_PASSWORD
     depends_on:
     - db
+
+  reverse-proxy:
+    image: nginx
+    ports:
+      - "3000:80"
+    volumes: 
+      -  ./nginx.conf:/etc/nginx/nginx.conf 
+    depends_on:
+      - web
 
 volumes: 
   pg-data:
