@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:alpine
@@ -25,7 +23,7 @@ services:
       - "5050:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@acme.com
-      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+      PGADMIN_DEFAULT_PASSWORD: $DB_PASSWORD
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     deploy:
@@ -43,7 +41,7 @@ services:
     environment:
       - DB_HOST=db
       - POSTGRES_USER=dockeruser
-      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_PASSWORD=$PG_PASSWORD
     depends_on:
       - db
     deploy:
