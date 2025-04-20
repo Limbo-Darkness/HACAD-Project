@@ -58,7 +58,7 @@ services:
     depends_on:
       - web
     deploy:
-      restart:policy
+      restart_policy:
         condition: on-failure
 
 volumes: 
