@@ -21,7 +21,7 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 
-  web:
+  web1:
     build: web
     expose:
       - "3000"
@@ -35,7 +35,17 @@ services:
     depends_on:
     - db
 
-      #reverse-proxy:
+  web2:
+    build: web
+    expose:
+      - "3000"
+    environment:
+    - DB_HOST=db
+    - POSTGRES_USER=dockeruser
+    - POSTGRES_PASSWORD=$PG_PASSWORD
+    depends_on:
+    - db
+
   nginx:
     image: nginx
     ports:
@@ -43,7 +53,8 @@ services:
     volumes: 
       -  ./nginx.conf:/etc/nginx/nginx.conf 
     depends_on:
-      - web 
+      - web1
+      - web2 
 
 volumes: 
   pg-data:
