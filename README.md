@@ -8,4 +8,4 @@
 
 ## Run Instructions:
 - Run bash `run_slotmachine.sh` with sudoer permissions.
-- To stop, run `docker stack rm myapp'.
+- To stop, run `docker stack rm myapp`.
